@@ -44,7 +44,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --watchAll --env=jsdom"
+    "test": "node scripts/test.js --watchAll --env=jsdom",
+    "coverage": "node scripts/test.js --watchAll --env=jsdom --coverage"
   },
   "devDependencies": {
     "@types/jest": "^23.3.1",
@@ -71,7 +72,7 @@
     "testURL": "http://localhost",
     "transform": {
       "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.tsx?$": "<rootDir>/config/jest/typescriptTransform.js",
+      "^.+\\.tsx?$": "ts-jest",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
       "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },

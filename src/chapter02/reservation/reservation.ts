@@ -5,10 +5,14 @@ export interface ReservationInfo {
 
 export const createReservation = (
   testPassenger: any,
-  testFlight: any
+  testFlight: any,
+  saver: any,
 ): ReservationInfo => {
-  return {
+  const reservation = {
     flightInformation: testFlight,
     passengerInformation: testPassenger,
   };
+
+  saver.saveReservation(reservation);
+  return reservation;
 };
