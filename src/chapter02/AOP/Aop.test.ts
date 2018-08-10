@@ -81,7 +81,7 @@ describe('Aop', function() {
       const returnedValue = targetObj.targetFn();
       expect(returnedValue).toEqual(targetReturnedVal);
     });
-    it('타겟 함수를 해당 객체의 콘텍스트에서 실행한다', () => {
+    it('타겟 함수를 해당 객체의 콘텍스트에서 실행한다', function() {
       function Target(this: any) {
         const self = this;
         return {
@@ -91,12 +91,14 @@ describe('Aop', function() {
         };
       }
 
-      const targetInstance = new Target();
+      const targetInstance = Target();
       const spy = jest.spyOn(targetInstance, 'targetFn');
       Aop.around('targetFn', argPassingAdvice, targetInstance);
-      expect(spy.mock.calls.length).toBe(10);
+      targetInstance.targetFn();
+      expect(spy.mock.calls.length).toBe(1);
       expect(targetInstance.targetFn).toHaveBeenCalled();
     });
+
     it('어드바이스를 타겟의 콘텍스트에서 실행한다', () => {
       const advice = function(this: any) {
         expect(this).toBe(targetObj);
